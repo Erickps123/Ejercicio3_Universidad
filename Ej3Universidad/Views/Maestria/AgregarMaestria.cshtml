@@ -1,0 +1,60 @@
+﻿@model Maestria
+@{
+    ViewData["Title"] = "Agregar Maestria";
+    DatosDocente datos = new DatosDocente();
+    DatosMaestria maestria = new DatosMaestria();
+    ViewBag.Maestria = maestria.Maestrias;
+    int i = 0;
+    ViewBag.IDDocente = datos.Docentes;
+}
+
+<h1>Agregar Maestria</h1>
+<hr />
+<br />
+@if (ViewBag.IDDocente.Count == 0)
+{
+    <div class="text-center">
+        <a class="alert-link" asp-controller="Docentes" asp-action="AgregarDocente">No tienes Docentes activos,  ¿Deseas agregar uno?</a>
+    </div>
+}
+<div class="col-5">
+    <form method="post" asp-controller="Maestria" asp-action="AgregarMaestria">
+
+        @if (ViewBag.Maestria.Count >= 0)
+        {
+            i = ViewBag.Maestria.Count + 1;
+            <div class="form-group">
+                <h5>Codigo</h5>
+                <input class="form-control" value="@i" asp-for="ID" readonly required />
+            </div>
+        }
+        else if (ViewBag.Maestria.Count < 0)
+        {
+            <div class="form-group">
+                <h5>Codigo</h5>
+                <input class="form-control" value="0" asp-for="ID" readonly required />
+            </div>
+        }
+
+        <div class="form-group">
+            <h5>Nombre</h5>
+            <input class="form-control" asp-for="NOMBRE" required />
+        </div>
+       
+        <div class="form-group">
+            <h5>Duracion</h5>
+            <input asp-for="DURACION" class="form-control" type="number" placeholder="expresado en años" required />
+        </div>
+        <div class="form-group">
+            <h5>Nombre del Docente</h5>
+            <select asp-for="ID_DOCENTE" class="form-control" required>
+                @foreach (var Datos in (List<Docente>)ViewBag.IDDocente)
+                {
+                    <option value="@Datos.ID">@Datos.NOMBRE </option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+</div>
+

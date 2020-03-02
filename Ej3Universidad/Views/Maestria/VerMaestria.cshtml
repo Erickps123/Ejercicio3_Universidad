@@ -1,0 +1,56 @@
+﻿@model DatosMaestria
+
+@{
+
+    ViewData["Title"] = "VerMaestria";
+
+}
+
+<h1>Maestria</h1>
+@if (Model.Maestrias.Count > 0)
+{
+    <div>
+        <a class="alert-link" asp-controller="Maestria" asp-action="AgregarMaestria"> ¿Quieres iniciar una Nueva Maestria?</a>
+    </div>
+}
+<br />
+
+<div>
+    <div>
+        @if (Model.Maestrias.Count > 0)
+        {
+            <a class="alert-link" asp-controller="Maestria" asp-action="EditarMaestria">Editar |</a><a class="alert-link" asp-controller="Maestria" asp-action="EliminarMaestria"> Eliminar</a>
+        }
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Maestria</th>
+                    <th>Duracion(años)</th>
+                    <th>ID Docente</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var data in Model.Maestrias)
+                {
+                    <tr>
+                        <td>@data.ID</td>
+                        <td>@data.NOMBRE</td>
+                        <td>@data.DURACION</td>
+                        <td>@data.ID_DOCENTE</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (Model.Maestrias.Count == 0)
+        {
+            <div class="text-center">
+                <a class="alert-link" asp-controller="Maestria" asp-action="AgregarMaestria">  ¿Desea iniciar su primer maestria?</a>
+            </div>
+        }
+    </div>
+</div>

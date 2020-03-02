@@ -1,0 +1,59 @@
+﻿@model Docente
+@{
+    ViewData["Title"] = "AgregarDocente";
+    DatosUniversidad datos = new DatosUniversidad();
+    DatosDocente docente = new DatosDocente();
+    ViewBag.Docentes = docente.Docentes;
+    int i = 0;
+    ViewBag.IDUniversidad = datos.Universidades;
+}
+
+<h1>Registrar un Docente</h1>
+<hr />
+<br />
+@if (ViewBag.IDUniversidad.Count == 0)
+{
+    <div class="text-center">
+        <a class="alert-link" asp-controller="Universidades" asp-action="AgregarUniversidad">No tienes Universidad para un Quorum de docentes,  ¿Deseas agregar una?</a>
+    </div>
+}
+<div class="col-5">
+    <form method="post" asp-controller="Docentes" asp-action="AgregarDocente">
+
+        @if (ViewBag.Docentes.Count >= 0)
+        {
+            i = ViewBag.Docentes.Count + 1;
+            <div class="form-group">
+                <h5>Codigo</h5>
+                <input class="form-control" value="@i" asp-for="ID" readonly required />
+            </div>
+        }
+        else if (ViewBag.Docentes.Count < 0)
+        {
+            <div class="form-group">
+                <h5>Codigo</h5>
+                <input class="form-control" value="0" asp-for="ID" readonly required />
+            </div>
+        }
+
+        <div class="form-group">
+            <h5>Nombre</h5>
+            <input class="form-control" asp-for="NOMBRE" required />
+        </div>
+      
+        <div class="form-group">
+            <h5>Teléfono</h5>
+            <input asp-for="TELEFONO" class="form-control input-phone" maxlength="12" id="phone" placeholder="000-000-0000" pattern="[0-9]{3}[ -][0-9]{3}[ -][0-9]{4}" title="Formato: 000-000-0000" required />
+        </div>
+        <div class="form-group">
+            <h5>Institucion</h5>
+            <select asp-for="ID_UNIVERSIDAD" class="form-control" required>
+                @foreach (var Datos in (List<Universidades>)ViewBag.IDUniversidad)
+                {
+                    <option value="@Datos.ID">@Datos.NOMBRE </option>
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar Docente</button>
+    </form>
+</div>

@@ -1,0 +1,39 @@
+﻿@model DatosUniversidad
+@{
+    ViewData["Title"] = "Ver Universidad";
+}
+
+<h1>Universidades</h1>
+@if (Model.Universidades.Count > 0)
+{
+    <a class="alert-link" asp-controller="Universidades" asp-action="AgregarUniversidad">Agregar |</a><a class="alert-link" asp-controller="Universidades" asp-action="EditarUniversidad"> Editar |</a><a class="alert-link" asp-controller="Universidades" asp-action="EliminarUniversidad"> Eliminar</a>
+}
+<br />
+<div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Proveedor in Model.Universidades)
+                {
+                    <tr>
+                        <td>@Proveedor.ID</td>
+                        <td>@Proveedor.NOMBRE</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @if (Model.Universidades.Count == 0)
+        {
+            <div class="text-center">
+                <a class="alert-link" asp-controller="Universidades" asp-action="AgregarUniversidad">  ¿Deseas registrar tu primera Universidad?</a>
+            </div>
+        }
+    </div>
+</div>

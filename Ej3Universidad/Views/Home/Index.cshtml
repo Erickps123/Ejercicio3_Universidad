@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center container">
+    <div class="row">
+
+        <div class="col-sm">
+            <span>🏫</span>
+            <a asp-area="" asp-controller="Universidades" asp-action="VerUniversidad">Universidades Registradas</a>
+        </div>
+        <div class="col-sm">
+            <span>👨‍🏫</span>
+            <a asp-area="" asp-controller="Docentes" asp-action="VerDocente">Listado de Docentes</a>
+        </div>
+        <div class="col-sm">
+            <span>📔</span>
+            <a asp-area="" asp-controller="Maestria" asp-action="VerMaestria">Maestrías Disponibles</a>
+        </div>
+        <div class="col-sm">
+            <span>👦</span>
+            <a asp-area="" asp-controller="Alumno" asp-action="VerAlumno">Listado de Alumnos</a>
+        </div>
+    </div>
+</div>
+<style>
+    .col-sm {
+        background-color:cadetblue;
+        margin: 1%;
+        padding: 10%;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+    span {
+        font-size: 36px;
+    }
+</style>
+

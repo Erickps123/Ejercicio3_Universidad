@@ -1,0 +1,65 @@
+﻿@model Alumno
+@{
+    DatosAlumnos alumnos = new DatosAlumnos();
+    ViewData["Title"] = "Modificar Alumno";
+    DatosMaestria datos = new DatosMaestria();
+    ViewBag.IDMaestria = datos.Maestrias;
+    int i = 0;
+    <meta charset="UTF-8">
+}
+<h1>Modificar Alumnos </h1>
+<div class="col-6 ">
+    <h5 class="text-primary">Selecciona el Alumno</h5>
+    <form method="post">
+        <select name="opciones" class="form-control">
+            <option>Seleccionar</option>
+            @foreach (var Data in alumnos.Alumnos)
+            {
+
+                <option value="@Data.ID"> @Data.ID) @Data.NOMBRE</option>
+                @(i++)
+            }
+        </select>
+        <br />
+        <div class="text-md-left">
+            <button class="btn btn-info" type="submit">Cargar Detalles</button>
+        </div>
+    </form>
+</div>
+<br />
+<div class="row">
+    <div class="col-6 formulario">
+        <form method="post" role="form">
+            <div class="form-group">
+                <h5>Codigo</h5>
+                <input id="ID" asp-for="ID" class="form-control" value="@ViewData["Codigo"]" readonly required />
+            </div>
+            <div class="form-group">
+                <h5>Nombre</h5>
+                <input class="form-control" asp-for="NOMBRE" value="@ViewData["Nombre"]" Required />
+            </div>
+            <div class="form-group">
+                <h5>Cedula</h5>
+                <input asp-for="Cedula" value="@ViewData["Cedula"]" class="form-control input" maxlength="14" id="phone" placeholder="000-0000000-0" pattern="[0-9]{3}[ -][0-9]{7}[ -][0-9]{1}" title="Formato: 000-0000000-0" required />
+            </div>
+            <div class="form-group">
+                <h5>Fecha de Vencimiento</h5>
+                <input class="form-control" value="@ViewData["FechaNac"]" asp-for="Fecha_Nac" type="date" Required />
+            </div>
+            <div class="form-group">
+                <h5>Maestria que cursa</h5>
+                <select asp-for="ID_Maestria" class="form-control" required>
+
+                    @foreach (var Datos in (List<Maestria>)ViewBag.IDMaestria)
+                    {
+                        <option value="@Datos.ID">@Datos.ID) @Datos.NOMBRE </option>
+                    }
+                </select>
+            </div>
+            <button type="submit" name="Save" value="save" class="btn btn-success">Guardar Cambios</button>
+        </form>
+    </div>
+
+
+</div>
+

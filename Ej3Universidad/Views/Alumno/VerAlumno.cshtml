@@ -1,0 +1,58 @@
+﻿@model DatosAlumnos
+
+@{
+
+    ViewData["Title"] = "VerAlumnos";
+
+}
+
+<h1>Alumnos</h1>
+@if (Model.Alumnos.Count > 0)
+{
+    <div>
+        <a class="alert-link" asp-controller="Alumno" asp-action="AgregarAlumno"> ¿Quieres registrar un alumno?</a>
+    </div>
+}
+<br />
+
+<div>
+    <div>
+        @if (Model.Alumnos.Count > 0)
+        {
+            <a class="alert-link" asp-controller="Alumno" asp-action="EditarAlumno">Editar |</a><a class="alert-link" asp-controller="Alumno" asp-action="EliminarAlumno"> Eliminar</a>
+        }
+        <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Codigo Maestria (Actual)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var prodcto in Model.Alumnos)
+                {
+                    <tr>
+                        <td>@prodcto.ID</td>
+                        <td>@prodcto.NOMBRE</td>
+                        <td>@prodcto.Cedula</td>
+                        <td>@prodcto.Fecha_Nac</td>
+                        <td>@prodcto.ID_Maestria</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (Model.Alumnos.Count == 0)
+        {
+            <div class="text-center">
+                <a class="alert-link" asp-controller="Alumno" asp-action="AgregarAlumno">  ¿Desea agregar su primer Alumno?</a>
+            </div>
+        }
+    </div>
+</div>
